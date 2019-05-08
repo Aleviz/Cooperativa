@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:head></h:head>
+<h:body>
+	<h:form id="form1">
+		<p:dataTable id="afiliados" var="af" value="#{cuentaMb.afiliados}">
+		
+			<p:column headerText="Nombres">
+				<h:outputText value="#{af.nombres}"/>
+			</p:column>
+			
+			<p:column headerText="Apellidos">
+				<h:outputText value="#{af.apellidos}" />
+			</p:column>
+			
+			<p:column headerText="es miembro">
+				<h:outputText value="#{af.clientes.get(0).esMiembro}" />
+			</p:column>
+
+			<p:column headerText="Ver cuentas">
+				<p:commandButton value="ver Cuentas" action="#{cuentaMb.vercuentas(af)}" update=":form1:cuentas"/>
+			</p:column>
+				
+		</p:dataTable>
+		
+		<p:dataTable id="cuentas" var="cu" value="#{cuentaMb.cuentas}">
+			<p:column headerText = "Numero de Cuenta">
+				<h:outputText value="#{cu.numerocuenta}" />
+			</p:column>
+			
+			<p:column headerText = "Tipo de cuenta">
+				<h:outputText value="#{cu.cuentatipo.nombre}" />
+			</p:column>
+			
+			<p:column headerText = "Total de cargos">
+				<h:outputText value="#{cu.totalCargos}" />
+			</p:column>
+			
+			<p:column headerText = "Total de abono">
+				<h:outputText value="#{cu.totalAbonos}" />
+			</p:column>
+
+			<p:column headerText = "saldo">
+				<h:outputText value="#{cu.saldo}" />
+			</p:column>
+		
+			<p:column headerText="Ver Transacciones">
+				<p:commandButton value="ver Transacciones" action="#{cuentaMb.verTransacciones(cu)}" update=":form1:transacciones"/>
+			</p:column>
+			
+		</p:dataTable>
+
+		<p:dataTable id="transacciones" var="tra" value="#{cuentaMb.transacciones}">
+		
+			<p:column headerText = "ID Transacciones">
+				<h:outputText value="#{tra.idTransaccion}" />
+			</p:column>
+		
+			
+			<p:column headerText = "Monto Cargo">
+				<h:outputText value="#{tra.montocargo}" />
+			</p:column>
+			
+			<p:column headerText = "Monto Abono">
+				<h:outputText value="#{tra.montobono}" />
+			</p:column>
+			
+			<p:column headerText = "Fecha">
+				<h:outputText value="#{tra.fecha}" />
+			</p:column>
+		</p:dataTable>
+		
+	</h:form>
+</h:body>
+	
+
+</html>

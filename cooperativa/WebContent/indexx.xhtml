@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+
+<h:form>
+	<p:growl id ="growl1" />
+	<p:wizard>
+		<p:tab title = "Informacion Basica">
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Nombres"/>
+				<p:inputText value="#{registroMb.persona.nombres}"> </p:inputText>	
+				<p:outputLabel value="Apellidos"/>
+				<p:inputText value="#{registroMb.persona.apellidos}"> </p:inputText>	
+				<p:outputLabel value="Documentos"/>
+				<p:inputText value="#{registroMb.persona.numeroDocumento}"> </p:inputText>	
+				<p:outputLabel value="Es Miembro"/>
+				<p:inputText value="#{registroMb.cliente.esMiembro}"> </p:inputText>	
+			</h:panelGrid>
+		</p:tab>
+		
+		
+		
+		
+		<p:tab title = "Direcciones">
+			<p:dataTable widgetVar="direccion" id = "direccion" var = "dir" value="#{registroMb.cliDirList}" editable = "true">
+				<f:facet name="header">DIRECCIONES</f:facet>
+				<p:column>
+					<p:cellEditor>
+						<f:facet name="output"><h:outputText value="#{dir.direccion}"></h:outputText></f:facet>
+						<f:facet name="input"><p:inputText value="#{dir.direccion}" ></p:inputText></f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column>
+					<p:rowEditor  />
+				</p:column>
+			</p:dataTable>
+			<p:commandButton value= "Añadir fila" process="@this" action="#{registroMb.addDireccion}" oncomplete="PF('direccion').addRow();"/>
+		</p:tab>
+		
+		
+		
+		
+				<p:tab title = "Telefonos">
+			<p:dataTable widgetVar="telefono" id = "telefono" var = "tel" value="#{registroMb.telCliList}" editable = "true">
+				<f:facet name="header">TELEFONOS</f:facet>
+				<p:column>
+					<p:cellEditor>
+						<f:facet name="output"><h:outputText value="#{tel.telefono}"></h:outputText></f:facet>
+						<f:facet name="input"><p:inputText value="#{tel.telefono}" ></p:inputText></f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column>
+					<p:rowEditor  />
+				</p:column>
+			</p:dataTable>
+			<p:commandButton value= "Añadir fila" process="@this" action="#{registroMb.addTelefonoCliente}" oncomplete="PF('telefono').addRow();"/>
+		</p:tab>	
+	
+	
+	
+	
+			<p:tab title = "Referencias">
+			<p:dataTable widgetVar="referencias" id = "referencias" var = "ref" value="#{registroMb.referencias}" editable = "true">
+				<f:facet name="header">REFERENCIAS</f:facet>
+				
+				<p:column headerText="NOMBRE">
+					<p:cellEditor>
+						<f:facet name="output"><h:outputText value="#{ref.nombre}"></h:outputText></f:facet>
+						<f:facet name="input"><p:inputText value="#{ref.nombre}" ></p:inputText></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="APELLIDOS">
+					<p:cellEditor>
+						<f:facet name="output"><h:outputText value="#{ref.apellidos}"></h:outputText></f:facet>
+						<f:facet name="input"><p:inputText value="#{ref.apellidos}" ></p:inputText></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="# DOCUMENTO">
+					<p:cellEditor>
+						<f:facet name="output"><h:outputText value="#{ref.numeroDocumento}"></h:outputText></f:facet>
+						<f:facet name="input"><p:inputText value="#{ref.numeroDocumento}" ></p:inputText></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="TIEMPO DE CONOCERSE">
+					<p:cellEditor>
+						<f:facet name="output"><h:outputText value="#{ref.tiempoconocerse}"></h:outputText></f:facet>
+						<f:facet name="input"><p:inputText value="#{ref.tiempoconocerse}" ></p:inputText></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column>
+					<p:rowEditor  />
+				</p:column>
+			</p:dataTable>
+			<p:commandButton value= "Añadir fila" process="@this" action="#{registroMb.addReferencias}" oncomplete="PF('referencias').addRow();"/>
+		</p:tab>
+		
+		
+		
+		
+			<p:tab title = "Beneficiarios">
+			<p:dataTable widgetVar="beneficiarios" id = "beneficiarios" var = "ben" value="#{registroMb.beneficiarios}" editable = "true">
+				<f:facet name="header">BENEFICIARIOS</f:facet>
+				
+				<p:column headerText="NOMBRE">
+					<p:cellEditor>
+						<f:facet name="output"><h:outputText value="#{ben.nombre}"></h:outputText></f:facet>
+						<f:facet name="input"><p:inputText value="#{ben.nombre}" ></p:inputText></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="APELLIDOS">
+					<p:cellEditor >
+						<f:facet name="output"><h:outputText value="#{ben.apellidos}"></h:outputText></f:facet>
+						<f:facet name="input"><p:inputText value="#{ben.apellidos}" ></p:inputText></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="# DOCUMENTOS">
+					<p:cellEditor >
+						<f:facet name="output"><h:outputText value="#{ben.numeroDocumento}"></h:outputText></f:facet>
+						<f:facet name="input"><p:inputText value="#{ben.numeroDocumento}" ></p:inputText></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="EDAD">
+					<p:cellEditor >
+						<f:facet name="output"><h:outputText value="#{ben.edad}"></h:outputText></f:facet>
+						<f:facet name="input"><p:inputText value="#{ben.edad}" ></p:inputText></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="PARENTESCO"> 
+					<p:cellEditor >
+						<f:facet name="output"><h:outputText value="#{ben.parentesco}"></h:outputText></f:facet>
+						<f:facet name="input"><p:inputText value="#{ben.parentesco}" ></p:inputText></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="PORCENTAJE">
+					<p:cellEditor>
+						<f:facet name="output"><h:outputText value="#{ben.porcentaje}"></h:outputText></f:facet>
+						<f:facet name="input"><p:inputText value="#{ben.porcentaje}" ></p:inputText></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				
+				<p:column>
+					<p:rowEditor  />
+				</p:column>
+			</p:dataTable>
+			<p:commandButton value= "Añadir fila" process="@this" action="#{registroMb.addBeneficiarios}" oncomplete="PF('beneficiarios').addRow();"/>
+			<p:commandButton value ="Guardar" action="#{registroMb.insertCliente}" update="growl1" process="@this"/> 
+		</p:tab>
+			</p:wizard>
+</h:form>
+<h:form>
+	<p:commandButton value="ir a cuentas" action="#{registroMb.iraCuentas}"/>
+</h:form>
+
+</h:body>
+
+
+</html>
